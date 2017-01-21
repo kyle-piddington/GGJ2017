@@ -2,7 +2,20 @@
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
-	
+
+	private static int numCollectedBeacons = 0;
+
+	public static void incrementCollectedBeacons() {
+
+		// TODO: trigger sound effects, for example
+
+		++numCollectedBeacons;
+	}
+
+	public static int getNumCollectedBeacons() {
+		return numCollectedBeacons;
+	}
+
 	// Use this for initialization
 	private void Start () {
 		BeginGame ();

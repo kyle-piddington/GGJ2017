@@ -26,7 +26,7 @@ public class BeaconCollection : MonoBehaviour {
 	}
 
 	void collectBeacon() {
-		GameController.incrementCollectedBeacons();
+		GameManager.incrementCollectedBeacons();
 
 		// Remove the beacon from the scene
 		GameObject.Destroy(beacon);
