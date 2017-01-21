@@ -3,7 +3,7 @@ using System.Collections;
 
 public class WallMaterialScript : MonoBehaviour {
 
-	public const float SonarSpeed = 30;
+	public const float SonarSpeed = 5;
 	private GameObject _player;
 	private PlayerPulseScript _playerPulseScript;
 	private Renderer _renderer;
