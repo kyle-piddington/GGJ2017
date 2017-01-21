@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         chargeBar = GetComponentInChildren<Slider>();
-        chargeBar.maxValue = pulseCharge.maxCharge;
+        chargeBar.maxValue = pulseCharge.MaxCharge;
 	}
 	
 	// Update is called once per frame
