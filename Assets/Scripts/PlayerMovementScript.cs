@@ -8,6 +8,7 @@ public class PlayerMovementScript : MonoBehaviour {
 	private Vector3 _playerTargetPosition;
 	private float _playerTargetRotation;
 	private float _playerAccumRotation;
+	private bool _playerIsColliding;
 
 	private bool playerIsMoving;
 	private bool playerIsTurning;
@@ -17,7 +18,19 @@ public class PlayerMovementScript : MonoBehaviour {
 		_playerAccumRotation = 0.0f;
 		_playerTargetRotation = 0.0f;
 	}
-	
+
+	bool willCollideWithWall(Vector3 direction)
+	{
+		RaycastHit rayOut;
+		if(Physics.Linecast(transform.position, transform.position + direction, out rayOut))
+		{
+			if (rayOut.collider.gameObject.tag == "Wall") {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	// Update is called once per frame
 	void Update () {
 		Debug.Log (transform.forward);
@@ -25,13 +38,22 @@ public class PlayerMovementScript : MonoBehaviour {
 		{
 			if(Input.GetKey(KeyCode.W))
 			{
-				_playerTargetPosition = transform.position + transform.forward * 2; 
-				playerIsMoving = true;
+				if (!willCollideWithWall (transform.forward * 2.5f)) {
+					
+					_playerTargetPosition = transform.position + transform.forward * 2; 
+					playerIsMoving = true;
+				} else {
+					_playerIsColliding = true;
+				}
 			}
 			else if(Input.GetKey(KeyCode.S))
 			{
-				_playerTargetPosition = transform.position + transform.forward * 2; 
-				playerIsMoving = true;
+				if(!willCollideWithWall(-transform.forward * 2.5f)){
+					_playerTargetPosition = transform.position - transform.forward * 2; 
+					playerIsMoving = true;
+				} else{
+						_playerIsColliding = true;
+				}
 			}
 			else if(Input.GetKey(KeyCode.A))
 			{
