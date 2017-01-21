@@ -73,6 +73,7 @@ public class Maze : MonoBehaviour {
 			if (neighbor == null) {
 				neighbor = CreateCell(coordinates);
 				CreatePassage(currentCell, neighbor, direction);
+				CreateCeiling(currentCell, neighbor, direction);
 				activeCells.Add(neighbor);
 			}
 			else {

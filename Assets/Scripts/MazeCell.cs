@@ -23,6 +23,10 @@ public class MazeCell : MonoBehaviour {
 		initializedEdgeCount += 1;
 	}
 
+	public void SetCeiling (MazeDirection direction, MazeCellEdge edge) {
+		edges [(int)direction] = edge;
+	}
+
 	public MazeDirection RandomUninitializedDirection {
 		get {
 			int skips = Random.Range (0, MazeDirections.Count - initializedEdgeCount);
