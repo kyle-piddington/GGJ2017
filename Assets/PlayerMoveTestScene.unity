@@ -2060,8 +2060,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pulseDist: 0
-  MaxCharge: 100
-  chargeSpeed: 30
+  MaxCharge: 40
+  minSonar: 15
+  chargeSpeed: 10
 --- !u!1 &576301980
 GameObject:
   m_ObjectHideFlags: 0

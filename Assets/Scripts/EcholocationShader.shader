@@ -7,7 +7,7 @@ Shader "Custom/Proximity" {
         _VisibleDistance ("Visibility Distance", float) = 10.0 // How close does the player have to be to make object visible
         _OutlineWidth ("Outline Width", float) = 0.1 // Used to add an outline around visible area a la Mario Galaxy
         _OutlineColour ("Outline Colour", color) = (1.0,1.0,1.0,1.0) // Colour of the outline
-        _EdgeBorder ("Edge Border", float) = 0.01
+        _EdgeBorder ("Edge Border", float) = 0.005
         _MaxDistance ("Max Distance", float) = 10.0
        
     }
@@ -70,7 +70,7 @@ Shader "Custom/Proximity" {
             		inEdge = 0.8;
             	}
             	inEdge = (inEdge)/((_VisibleDistance - dist)*speedScale) - 0.1;
-            
+            	inEdge *= tex2D(_MainTex,input.tex + float2(_VisibleDistance + dist,-_VisibleDistance + dist));
                 return float4(inEdge,inEdge,inEdge,1); // Visible
             }
             else if (dist < _VisibleDistance + _OutlineWidth && dist < _MaxDistance) {
