@@ -7,12 +7,15 @@ public class PlayerMovementScript : MonoBehaviour {
 	
 	private Vector3 _playerTargetPosition;
 	private float _playerTargetRotation;
+	private float _playerAccumRotation;
 
 	private bool playerIsMoving;
 	private bool playerIsTurning;
 	// Use this for initialization
 	void Start () {
 		_playerTargetPosition = transform.position;
+		_playerAccumRotation = 0.0f;
+		_playerTargetRotation = 0.0f;
 	}
 	
 	// Update is called once per frame
@@ -58,11 +61,13 @@ public class PlayerMovementScript : MonoBehaviour {
 				}
 			}
 			if (playerIsTurning) {
-				if (true){//Mathf.Abs (_playerTargetRotation - transform.eulerAngles.y) < PlayerTurnSpeed * Time.deltaTime) {
+				if (Mathf.Abs(_playerTargetRotation - _playerAccumRotation) < PlayerTurnSpeed * Time.deltaTime) {
 					transform.eulerAngles = new Vector3 (0, _playerTargetRotation, 0);
+					_playerAccumRotation = _playerTargetRotation;
 					playerIsTurning = false;
 				} else {
-					float direction = Mathf.Sign (_playerTargetRotation - transform.eulerAngles.y);
+					float direction = Mathf.Sign (_playerTargetRotation - _playerAccumRotation);
+					_playerAccumRotation += direction * PlayerTurnSpeed;
 					transform.Rotate (new Vector3 (0, PlayerTurnSpeed * direction, 0));	
 				}
 			}
