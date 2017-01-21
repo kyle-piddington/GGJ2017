@@ -14,6 +14,10 @@ public class Maze : MonoBehaviour {
 
 	public MazePassage passagePrefab;
 	public MazeWall wallPrefab;
+	public MazeEmpty emptyPrefab;
+	public MazeCeiling ceilingPrefab;
+
+	public int randomizer;
 
 	public MazeCell GetCell (IntVector2 coordinates) {
 		return cells [coordinates.x, coordinates.z];
@@ -33,6 +37,22 @@ public class Maze : MonoBehaviour {
 			wall = Instantiate (wallPrefab) as MazeWall;
 			wall.Initialize (otherCell, cell, direction.GetOpposite ());
 		}
+	}
+
+	private void CreateEmpty (MazeCell cell, MazeCell otherCell, MazeDirection direction) {
+		MazeEmpty empty = Instantiate (emptyPrefab) as MazeEmpty;
+		empty.Initialize (cell, otherCell, direction);
+		if (otherCell != null) {
+			empty = Instantiate (emptyPrefab) as MazeEmpty;
+			empty.Initialize (otherCell, cell, direction.GetOpposite ());
+		}
+	}
+
+	private void CreateCeiling (MazeCell cell, MazeCell otherCell, MazeDirection direction) {
+		MazeCeiling ceiling = Instantiate (ceilingPrefab) as MazeCeiling;
+		ceiling.Initialize (cell, otherCell, direction);
+		ceiling = Instantiate (ceilingPrefab) as MazeCeiling;
+		ceiling.Initialize (otherCell, cell, direction.GetOpposite ());
 	}
 
 	private void DoFirstGenerationStep (List<MazeCell> activeCells) {
@@ -56,7 +76,11 @@ public class Maze : MonoBehaviour {
 				activeCells.Add(neighbor);
 			}
 			else {
-				CreateWall(currentCell, neighbor, direction);
+				randomizer = Random.Range (0, 100);
+				if (randomizer < 50)
+					CreateEmpty (currentCell, neighbor, direction);
+				else
+					CreateWall(currentCell, neighbor, direction);
 			}
 		}
 		else {
