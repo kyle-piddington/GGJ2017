@@ -73,6 +73,7 @@ public class Maze : MonoBehaviour {
 			if (neighbor == null) {
 				neighbor = CreateCell(coordinates);
 				CreatePassage(currentCell, neighbor, direction);
+				CreateCeiling(currentCell, neighbor, direction);
 				activeCells.Add(neighbor);
 			}
 			else {
@@ -89,14 +90,15 @@ public class Maze : MonoBehaviour {
 	}
 
 	public IEnumerator Generate() {
-		WaitForSeconds delay = new WaitForSeconds(generationStepDelay);
+		//WaitForSeconds delay = new WaitForSeconds(generationStepDelay);
 		cells = new MazeCell[size.x, size.z];
 		List<MazeCell> activeCells = new List<MazeCell>();
 		DoFirstGenerationStep (activeCells);
 		while (activeCells.Count > 0) {
-			yield return delay;
+			//yield return delay;
 			DoNextGenerationStep(activeCells);
 		}
+		yield return null;
 	}
 
 	public IntVector2 RandomCoordinates {

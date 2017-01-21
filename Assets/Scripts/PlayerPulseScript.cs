@@ -5,7 +5,7 @@ public class PlayerPulseScript : MonoBehaviour {
 
 	public float _pulseDist;
 	public float MaxCharge;
-	public float minSonar = 20;
+	public float minSonar = 2;
 	public float chargeSpeed;
 	private float _sonarCharge;
 	// Use this for initialization

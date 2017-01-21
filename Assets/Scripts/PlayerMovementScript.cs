@@ -37,9 +37,9 @@ public class PlayerMovementScript : MonoBehaviour {
 		{
 			if(Input.GetKey(KeyCode.W))
 			{
-				if (!willCollideWithWall (transform.forward * 2.5f)) {
+				if (!willCollideWithWall (transform.forward * 0.75f)) {
 					
-					_playerTargetPosition = transform.position + transform.forward * 2; 
+					_playerTargetPosition = transform.position + transform.forward.normalized; 
 					playerIsMoving = true;
 				} else {
 					_playerIsColliding = true;
@@ -47,8 +47,8 @@ public class PlayerMovementScript : MonoBehaviour {
 			}
 			else if(Input.GetKey(KeyCode.S))
 			{
-				if(!willCollideWithWall(-transform.forward * 2.5f)){
-					_playerTargetPosition = transform.position - transform.forward * 2; 
+				if(!willCollideWithWall(-transform.forward * 0.75f)){
+					_playerTargetPosition = transform.position - transform.forward; 
 					playerIsMoving = true;
 				} else{
 						_playerIsColliding = true;
