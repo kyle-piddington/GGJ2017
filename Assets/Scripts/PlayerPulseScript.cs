@@ -7,9 +7,7 @@ public class PlayerPulseScript : MonoBehaviour {
 	public float _pulseDist;
 	public float MaxCharge;
 
-
     public float chargeRate = 10.0f;
-    
     public float currentCharge = 0.0f;
     public float drainRate = 10.0f;
 	public float minSonar = 2;
@@ -51,8 +49,7 @@ public class PlayerPulseScript : MonoBehaviour {
             {
                 canCharge = true;
                 discharge = false;
-            }
-                
+            }              
         }    
 	}
 
