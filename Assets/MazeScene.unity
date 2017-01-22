@@ -380,6 +380,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mazePrefab: {fileID: 11400000, guid: 8498c33a479cba24f9b9a5b1b3306234, type: 2}
   mazeInstance: {fileID: 0}
+  bear: {fileID: 1345752489122120, guid: ad7ace736057f4093a6c93446072ec07, type: 2}
+  lion: {fileID: 1345285770892832, guid: 3be4fc44026ae4ac987c7faae70197d5, type: 2}
+  horse: {fileID: 1614585884652218, guid: 2b0517d91701b450fa2c66bdbbdc512a, type: 2}
+  dragon: {fileID: 1600165041842572, guid: b2eba453751d242258407897aee6e26c, type: 2}
+  beaconModels: []
 --- !u!108 &1005266488
 Light:
   m_ObjectHideFlags: 0
