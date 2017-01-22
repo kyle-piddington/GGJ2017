@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour {
 	public GameObject dragon;
 
 	public GameObject[] beaconModels;
-	public GameObject particles;
 
 	private void placeBeacons(Maze maze) {
 		// Determine the beacon locations.
@@ -103,10 +102,10 @@ public class GameManager : MonoBehaviour {
 			IntVector2 beaconLocation = beaconLocations [i];
 			//MazeCell beaconCell = maze.GetCell (beaconLocations [i]);
 			GameObject beaconCell = GameObject.Find("Maze Cell " + beaconLocation.x + ", " + beaconLocation.z);
-
+       
 			Vector3 beaconPosition = new Vector3 (beaconCell.transform.position.x, -0.0f, beaconCell.transform.position.z);
 			GameObject beacon = Instantiate (beaconModels[i % beaconModels.Length], beaconPosition, Quaternion.identity);
-			GameObject beaconParticles = Instantiate (particles, beaconPosition, Quaternion.identity);
+			
 			//beacon.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
 
 			beacons [i] = beacon;
