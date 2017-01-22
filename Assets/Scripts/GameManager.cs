@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
-
+    public GameObject gameOverPanel;
 	public static int NUM_BEACONS = 4;
 	private static int MIN_BEACON_DISTANCE = 6;
 
 	public static int numCollectedBeacons = 0;
+    public static bool playerDead = false;
 
 	public static void incrementCollectedBeacons() {
 
@@ -26,9 +28,8 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	private void Update () {
-//		if (Input.GetKeyDown (KeyCode.Space)) {
-//			RestartGame ();
-//		}
+		if (playerDead && Input.GetKeyDown (KeyCode.Space)) 
+			RestartGame ();		     
 	}
 
 	public Maze mazePrefab;
@@ -37,17 +38,19 @@ public class GameManager : MonoBehaviour {
 
 	private void BeginGame() {
 		mazeInstance = Instantiate (mazePrefab) as Maze;
-		StartCoroutine(mazeInstance.Generate());
+		//StartCoroutine(mazeInstance.Generate());
 
 		beaconModels = new GameObject[] {bear, lion, horse, dragon};
 		placeBeacons (mazeInstance);
 	}
 
-	private void RestartGame() {
+	private void RestartGame() {        
+        playerDead = false;
+        gameOverPanel.SetActive(false);
 		StopAllCoroutines();
 		Destroy (mazeInstance.gameObject);
-		BeginGame ();
-	}
+        SceneManager.LoadScene(1);
+    }
 
 	public GameObject bear;
 	public GameObject lion;
@@ -55,6 +58,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject dragon;
 
 	public GameObject[] beaconModels;
+	public GameObject particles;
 
 	private void placeBeacons(Maze maze) {
 		// Determine the beacon locations.
@@ -96,13 +100,18 @@ public class GameManager : MonoBehaviour {
 		GameObject[] beacons = new GameObject[NUM_BEACONS];
 
 		for (var i = 0; i < NUM_BEACONS; ++i) {
-			MazeCell beaconCell = maze.GetCell (beaconLocations [i]);
+			IntVector2 beaconLocation = beaconLocations [i];
+			//MazeCell beaconCell = maze.GetCell (beaconLocations [i]);
+			GameObject beaconCell = GameObject.Find("Maze Cell " + beaconLocation.x + ", " + beaconLocation.z);
+
 			Vector3 beaconPosition = new Vector3 (beaconCell.transform.position.x, -0.0f, beaconCell.transform.position.z);
 			GameObject beacon = Instantiate (beaconModels[i % beaconModels.Length], beaconPosition, Quaternion.identity);
-
+			GameObject beaconParticles = Instantiate (particles, beaconPosition, Quaternion.identity);
 			//beacon.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
 
 			beacons [i] = beacon;
+			print (beacon);
+			print (beacon.transform.parent);
 		}
 
 	}

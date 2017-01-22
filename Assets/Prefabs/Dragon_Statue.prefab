@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 4668568738362294}
   - component: {fileID: 33527430506422304}
   - component: {fileID: 23457453404320378}
+  - component: {fileID: 114523812130855542}
   m_Layer: 0
   m_Name: Stoyka
   m_TagString: Untagged
@@ -82,7 +83,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1600165041842572}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.200165, y: -2.7401872, z: -9.621171}
+  m_LocalPosition: {x: -3.2605662, y: 1.4877032, z: 4.2189617}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4024280342911056}
@@ -116,7 +117,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: fd796c65f31954c27ac5ff4d16dc2c2e, type: 2}
+  - {fileID: 2100000, guid: 06d89d6a4fcf046eb91421f65a7b7e66, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -147,7 +148,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: fd796c65f31954c27ac5ff4d16dc2c2e, type: 2}
+  - {fileID: 2100000, guid: 06d89d6a4fcf046eb91421f65a7b7e66, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -207,3 +208,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be34f89747b4428aae7c1ccfb7d7fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114523812130855542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1780388430423744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e988562e6a29f4083be8cd5865d0a1da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HighlightTime: 2.5

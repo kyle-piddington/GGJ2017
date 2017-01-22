@@ -67,7 +67,7 @@ Shader "Custom/Proximity" {
 	            // Return appropriate colour
 	            if (dist < _VisibleDistance && dist < _MaxDistance) {
 	            	//Edge shading only
-	            	half inEdge = 0;
+	            	half inEdge = 0.1;
 	            	half speedScale = 0.5;
 	            	if(min(input.tex.x, input.tex.y) < _EdgeBorder || max(input.tex.x, input.tex.y) > (1 - _EdgeBorder))
 	            	{

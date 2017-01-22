@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
+    public GameObject panel;
     public PlayerPulseScript pulseCharge;
     Text fragCount;
     Slider chargeBar;
@@ -19,5 +20,10 @@ public class UIManager : MonoBehaviour {
 	void Update () {
         chargeBar.value = pulseCharge.currentCharge;
         fragCount.text = GameManager.numCollectedBeacons + "/" + GameManager.NUM_BEACONS;
+
+        if (GameManager.playerDead && !panel.activeSelf)
+        {
+            panel.SetActive(true);
+        }
 	}
 }

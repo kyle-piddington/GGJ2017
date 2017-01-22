@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 3300000}
   - component: {fileID: 6500000}
   - component: {fileID: 2300000}
+  - component: {fileID: 114324192477560612}
   m_Layer: 0
   m_Name: Ceiling
   m_TagString: Untagged
@@ -74,7 +75,7 @@ MeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fd796c65f31954c27ac5ff4d16dc2c2e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136,3 +137,15 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
+--- !u!114 &114324192477560612
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e988562e6a29f4083be8cd5865d0a1da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HighlightTime: 2.5

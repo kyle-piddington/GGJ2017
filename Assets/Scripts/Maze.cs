@@ -55,7 +55,7 @@ public class Maze : MonoBehaviour {
 		ceiling.Initialize (otherCell, cell, direction.GetOpposite ());
 	}
 
-	private void DoFirstGenerationStep (List<MazeCell> activeCells) {
+	private void DoFirstGenerationStep (List<MazeCell> activeCells) { 
 		activeCells.Add (CreateCell (RandomCoordinates));
 	}
 
@@ -102,14 +102,14 @@ public class Maze : MonoBehaviour {
 	}
 
 	public IntVector2 RandomCoordinates {
-				get {
-						return new IntVector2 (Random.Range (0, size.x), Random.Range (0, size.z));
-				}
+		get {
+			return new IntVector2 (Random.Range (0, size.x), Random.Range (0, size.z));
 		}
+	}
 
 	public bool ContainsCoordinates (IntVector2 coordinates) {
-				return coordinates.x >= 0 && coordinates.x < size.x && coordinates.z >= 0 && coordinates.z < size.z;
-		}
+		return coordinates.x >= 0 && coordinates.x < size.x && coordinates.z >= 0 && coordinates.z < size.z;
+	}
 
 	private MazeCell CreateCell (IntVector2 coordinates) {
 		MazeCell newCell = Instantiate (cellPrefab) as MazeCell;
