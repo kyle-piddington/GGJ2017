@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour {
 
 	private void BeginGame() {
 		mazeInstance = Instantiate (mazePrefab) as Maze;
-		StartCoroutine(mazeInstance.Generate());
+		//StartCoroutine(mazeInstance.Generate());
 
 		beaconModels = new GameObject[] {bear, lion, horse, dragon};
 		placeBeacons (mazeInstance);
@@ -96,8 +96,8 @@ public class GameManager : MonoBehaviour {
 		GameObject[] beacons = new GameObject[NUM_BEACONS];
 
 		for (var i = 0; i < NUM_BEACONS; ++i) {
-			MazeCell beaconCell = maze.GetCell (beaconLocations [i]);
-			Vector3 beaconPosition = new Vector3 (beaconCell.transform.position.x, -0.0f, beaconCell.transform.position.z);
+			//MazeCell beaconCell = maze.GetCell (beaconLocations [i]);
+			Vector3 beaconPosition = new Vector3 (beaconLocations[i].x, -0.0f, beaconLocations[i].z);
 			GameObject beacon = Instantiate (beaconModels[i % beaconModels.Length], beaconPosition, Quaternion.identity);
 
 			//beacon.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
