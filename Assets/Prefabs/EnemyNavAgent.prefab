@@ -252,6 +252,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1348980427225604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4813551348029690}
+  - component: {fileID: 108018692410402198}
+  m_Layer: 0
+  m_Name: Point light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1384958164912570
 GameObject:
   m_ObjectHideFlags: 1
@@ -479,7 +495,7 @@ GameObject:
   - component: {fileID: 65071955594169198}
   m_Layer: 0
   m_Name: EnemyNavAgent
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -642,9 +658,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1743888658415372}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.05, y: -0.12, z: 6.94}
-  m_LocalScale: {x: 0.89, y: 0.89, z: 0.89}
+  m_LocalPosition: {x: -8.9, y: 0.22, z: 8.63}
+  m_LocalScale: {x: 0.279, y: 0.279, z: 0.279}
   m_Children:
+  - {fileID: 4813551348029690}
   - {fileID: 4103709688044294}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -724,7 +741,7 @@ Transform:
   - {fileID: 4792580597608388}
   - {fileID: 4263711681870842}
   m_Father: {fileID: 4026053912311014}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4134840377164630
 Transform:
@@ -1044,6 +1061,19 @@ Transform:
   m_Father: {fileID: 4103709688044294}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4813551348029690
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1348980427225604}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: 0.14, y: 2.12, z: 0.88}
+  m_LocalScale: {x: 3.5842292, y: 3.5842292, z: 3.5842292}
+  m_Children: []
+  m_Father: {fileID: 4026053912311014}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4816320591289468
 Transform:
   m_ObjectHideFlags: 1
@@ -1200,10 +1230,10 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1743888658415372}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 3.27, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95987135394991634
 Animator:
@@ -1222,6 +1252,40 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!108 &108018692410402198
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1348980427225604}
+  m_Enabled: 1
+  serializedVersion: 7
+  m_Type: 2
+  m_Color: {r: 0.9485294, g: 0.2789792, b: 0.2789792, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!114 &114208198924549106
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1233,7 +1297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89c6cd60814a4bcca24095296e49efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkRadius: 30
+  walkRadius: 15
 --- !u!137 &137258458552657588
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1441,8 +1505,8 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1743888658415372}
   m_Enabled: 1
-  m_Radius: 1
-  m_Speed: 3.5
+  m_Radius: 0.5
+  m_Speed: 1.3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
