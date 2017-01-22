@@ -91,6 +91,10 @@ public class PlayerPulseScript : MonoBehaviour {
 			if (eAI != null) {
 				eAI.playerPinged (transform.position);
 			}
+			BeaconParticleSystem bSys = c.GetComponent<BeaconParticleSystem> ();
+			if (bSys != null) {
+				bSys.burstParticleSystem ();
+			}
         }
 
         _sonarCharge = 0;
