@@ -37,4 +37,24 @@ public class CameraManager : MonoBehaviour {
         yield return null;
     }
 
+    public IEnumerator Oscillate(float shakeAmount)
+    {
+        Vector3 originalCamPos = transform.localPosition;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float z = 1;
+
+            z *= Random.value * shakeAmount;
+
+            transform.localPosition = new Vector3(originalCamPos.x, originalCamPos.y, z);
+
+            yield return null;
+        }
+        elapsed = 0.0f;
+        transform.localPosition = new Vector3(originalCamPos.x, originalCamPos.y, 0);
+        yield return null;
+    }
+
 }

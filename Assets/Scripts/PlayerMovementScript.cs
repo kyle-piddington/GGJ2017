@@ -2,18 +2,25 @@
 using System.Collections;
 
 public class PlayerMovementScript : MonoBehaviour {
-	public float PlayerSpeed = 10;
+    private PlayerPulseScript playerPulse;
+
+    public float PlayerSpeed = 10;
 	public float PlayerTurnSpeed = 1;
 	
 	private Vector3 _playerTargetPosition;
 	private float _playerTargetRotation;
 	private float _playerAccumRotation;
+    private char prevDirection = 'W';
+    private char currentDirection = 'A';
 	private bool _playerIsColliding;
 
 	private bool playerIsMoving;
 	private bool playerIsTurning;
+    private bool playerBump;
 	// Use this for initialization
 	void Start () {
+        playerPulse = GetComponent<PlayerPulseScript>();
+
 		_playerTargetPosition = transform.position;
 		_playerAccumRotation = 0.0f;
 		_playerTargetRotation = 0.0f;
@@ -37,6 +44,7 @@ public class PlayerMovementScript : MonoBehaviour {
 		{
 			if(Input.GetKey(KeyCode.W))
 			{
+                currentDirection = 'W';
 				if (!willCollideWithWall (transform.forward * 0.75f)) {
 					
 					_playerTargetPosition = transform.position + transform.forward.normalized; 
@@ -47,26 +55,26 @@ public class PlayerMovementScript : MonoBehaviour {
 			}
 			else if(Input.GetKey(KeyCode.S))
 			{
+                currentDirection = 'S';
 				if(!willCollideWithWall(-transform.forward * 0.75f)){
 					_playerTargetPosition = transform.position - transform.forward; 
 					playerIsMoving = true;
 				} else{
-						_playerIsColliding = true;
+					_playerIsColliding = true;
 				}
 			}
 			else if(Input.GetKey(KeyCode.A))
 			{
+                currentDirection = 'A';
 				_playerTargetRotation -= 90;
 				playerIsTurning = true;
 			}
 			else if(Input.GetKey(KeyCode.D))
 			{
+                currentDirection = 'D';
 				_playerTargetRotation += 90;
 				playerIsTurning = true;
 			}
-
-			
-
 		}
 		else
 		{
@@ -93,5 +101,17 @@ public class PlayerMovementScript : MonoBehaviour {
 				}
 			}
 		}
+
+        if (_playerIsColliding && !playerBump)
+        {
+            playerPulse.bumpPulse();
+            _playerIsColliding = false;
+            playerBump = true;
+        }
+
+        if (prevDirection != currentDirection)
+            playerBump = false;
+
+        prevDirection = currentDirection;
 	}
 }

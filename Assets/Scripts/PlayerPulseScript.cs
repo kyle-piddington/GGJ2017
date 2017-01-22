@@ -90,4 +90,19 @@ public class PlayerPulseScript : MonoBehaviour {
         _sonarCharge = 0;
         sfx.resetAudioMarkers();
     }
+
+    public void bumpPulse()
+    {
+        sfx.unchargedPingAudio.Play();
+        StartCoroutine(Camera.main.GetComponent<CameraManager>().Shake(camShakeDampFactor));
+        Collider[] walls = Physics.OverlapSphere(transform.position, minSonar);
+        foreach (Collider c in walls)
+        {
+            WallMaterialScript scr = c.GetComponent<WallMaterialScript>();
+            if (scr != null)
+            {
+                scr.SetSonar(transform.position, minSonar);
+            }
+        }
+    }
 }

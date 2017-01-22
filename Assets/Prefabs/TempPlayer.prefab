@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elapsed: 0
-  duration: 3
+  duration: 2
   shakeAmount: 0.33
 --- !u!124 &124000012153446202
 Behaviour:
