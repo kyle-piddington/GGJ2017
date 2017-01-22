@@ -6,16 +6,12 @@ public class PlayerPulseScript : MonoBehaviour {
     public float coolDownTime;
 	public float _pulseDist;
 	public float MaxCharge;
-<<<<<<< HEAD
 
     public float chargeRate = 10.0f;
-    public float maxCharge = 100.0f;
     public float currentCharge = 0.0f;
     public float drainRate = 10.0f;
-=======
 	public float minSonar = 2;
 	public float chargeSpeed;
->>>>>>> 8d2192bc4bd043b8c8e5a0df71d5643191bbe1f7
 	private float _sonarCharge;
     private bool canCharge = true;
     private bool discharge = false;
@@ -27,11 +23,15 @@ public class PlayerPulseScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if (Input.GetKeyDown(KeyCode.Space) && canCharge)
+        {
+            _sonarCharge = minSonar;
+        }
         if (Input.GetKey(KeyCode.Space) && _sonarCharge < MaxCharge && canCharge)
         {
             _sonarCharge += Time.deltaTime * chargeRate;
-            currentCharge = Mathf.Clamp(currentCharge + chargeRate * Time.deltaTime, 0, maxCharge);
-            if (currentCharge == maxCharge)
+            currentCharge = Mathf.Clamp(currentCharge + chargeRate * Time.deltaTime, 0, MaxCharge);
+            if (currentCharge == MaxCharge)
             {
                 canCharge = false;
             }
@@ -39,31 +39,17 @@ public class PlayerPulseScript : MonoBehaviour {
         else if (Input.GetKeyUp(KeyCode.Space))
         {
             releaseCharge();
+            canCharge = false;
         }
-        else if (Input.GetKeyUp(KeyCode.Space))
-        {
-            Debug.Log(_sonarCharge);
-            Collider[] walls = Physics.OverlapSphere(transform.position, _sonarCharge + 5.0f);
-            foreach (Collider c in walls)
-            {
-                Debug.Log("Hit");
-                WallMaterialScript scr = c.GetComponent<WallMaterialScript>();
-                if (scr != null)
-                {
-                    scr.SetSonar(transform.position, _sonarCharge);
-                }
-            }
-            _sonarCharge = minSonar;
-        }
+      
         if (discharge)
         {
-            currentCharge = Mathf.Clamp(currentCharge - Time.deltaTime * drainRate, 0, maxCharge);
+            currentCharge = Mathf.Clamp(currentCharge - Time.deltaTime * drainRate, 0, MaxCharge);
             if (currentCharge == 0)
             {
                 canCharge = true;
                 discharge = false;
-            }
-                
+            }              
         }    
 	}
 
@@ -74,18 +60,18 @@ public class PlayerPulseScript : MonoBehaviour {
 
     public void releaseCharge()
     {
-        StartCoroutine(Camera.main.GetComponent<CameraManager>().Shake((currentCharge / maxCharge) * camShakeDampFactor));
+        StartCoroutine(Camera.main.GetComponent<CameraManager>().Shake((currentCharge / MaxCharge) * camShakeDampFactor));
         Debug.Log(_sonarCharge);
-        Collider[] walls = Physics.OverlapSphere(transform.position, 30.5f);
+        Collider[] walls = Physics.OverlapSphere(transform.position, _sonarCharge + 5.0f);
         foreach (Collider c in walls)
         {
-            Debug.Log("Hit");
             WallMaterialScript scr = c.GetComponent<WallMaterialScript>();
             if (scr != null)
-            {
-                scr.SetSonar(transform.position, 25);
+            { 
+               scr.SetSonar(transform.position, _sonarCharge);
             }
         }
+
         _sonarCharge = 0;
         discharge = true;
     }

@@ -18,7 +18,7 @@ public class CameraManager : MonoBehaviour {
 	}
     public IEnumerator Shake(float shakeAmount)
     {
-        Vector3 originalCamPos = Camera.main.transform.position;
+        Vector3 originalCamPos = transform.localPosition;
 
         while (elapsed < duration)
         {
@@ -28,12 +28,13 @@ public class CameraManager : MonoBehaviour {
             x *= Random.value * shakeAmount;
             y *= Random.value * shakeAmount;
 
-            Camera.main.transform.position = new Vector3(x, y, gameObject.transform.parent.position.z);
+            transform.localPosition = new Vector3(x, y, 0);
 
             yield return null;
         }
         elapsed = 0.0f;
-        Camera.main.transform.position = new Vector3(originalCamPos.x, originalCamPos.y, gameObject.transform.parent.position.z);
+        transform.localPosition = new Vector3(originalCamPos.x, originalCamPos.y, 0);
+        yield return null;
     }
 
 }
