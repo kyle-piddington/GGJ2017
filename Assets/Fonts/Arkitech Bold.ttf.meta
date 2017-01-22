@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: c2d9778643a960449836623ffc2e9aff
+timeCreated: 1485049907
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Arkitech Bold
+  fontNames:
+  - Arkitech Bold
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
