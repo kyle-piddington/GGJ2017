@@ -9,6 +9,8 @@ public class BeaconCollection : MonoBehaviour {
 
 	private GameObject beacon;
 	private GameObject player;
+    public GameObject particlePrefab;
+    private GameObject particles;
 
 	// Use this for initialization
 	void Start () {
@@ -16,8 +18,9 @@ public class BeaconCollection : MonoBehaviour {
 		beacon = gameObject;
 		print (beacon);
 		player = GameObject.FindWithTag("Player");
+        particles = Instantiate(particlePrefab, transform.position, Quaternion.identity);
 
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -36,8 +39,10 @@ public class BeaconCollection : MonoBehaviour {
         beaconAhoy.Stop();
         beaconPickUp.Play();
 		// Remove the beacon from the scene
+
         gameObject.transform.position = new Vector3(0f, 999f, 0f);
 		Destroy(beacon, beaconPickUp.clip.length);
+		GameObject.Destroy(particles);
 
 		print ("Beacon collected.");
 
