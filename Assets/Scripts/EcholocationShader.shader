@@ -74,7 +74,7 @@ Shader "Custom/Proximity" {
 	            		inEdge = 0.8;
 	            	}
 	            	inEdge = (inEdge)/((_VisibleDistance - dist)*speedScale) - 0.1;
-	            	inEdge *= tex2D(_MainTex,input.tex + float2(_VisibleDistance + dist,-_VisibleDistance + dist));
+
 	                return float4(inEdge,inEdge,inEdge,1); // Visible
 	            }
 	            else if (dist < _VisibleDistance + _OutlineWidth && dist < _MaxDistance) {

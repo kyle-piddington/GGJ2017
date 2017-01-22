@@ -62,7 +62,7 @@ public class PlayerPulseScript : MonoBehaviour {
     {
         StartCoroutine(Camera.main.GetComponent<CameraManager>().Shake((currentCharge / MaxCharge) * camShakeDampFactor));
         Debug.Log(_sonarCharge);
-        Collider[] walls = Physics.OverlapSphere(transform.position, _sonarCharge + 5.0f);
+        Collider[] walls = Physics.OverlapSphere(transform.position, _sonarCharge + 0.5f);
         foreach (Collider c in walls)
         {
             WallMaterialScript scr = c.GetComponent<WallMaterialScript>();

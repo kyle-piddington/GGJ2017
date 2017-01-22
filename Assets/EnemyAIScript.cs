@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class EnemyAIScript : MonoBehaviour {
 	NavMeshAgent agent;
 	public float walkRadius;
-	public static float EnemySFXDist = 7;
+	public static float EnemySFXDist = 2;
 	private GameObject player;
 
 	Vector3 target;
