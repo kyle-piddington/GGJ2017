@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour {
             audioBegin = true;
         }
 
-        if (minBeaconDistance < 2f)
+        if (minBeaconDistance < 3f)
             sfx.setBackGroundVol(.05f);
         else
             sfx.setBackGroundVol(1f);
