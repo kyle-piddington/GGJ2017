@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BeaconCollection : MonoBehaviour {
+    SFXManager sfx;
     public AudioSource beaconAhoy;
     public AudioSource beaconPickUp;
 	private const float BEACON_COLLECTION_DISTANCE = 0.5f;
+    private static float minDistance = 20f;
 
 	private GameObject beacon;
 	private GameObject player;
@@ -14,12 +16,12 @@ public class BeaconCollection : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        sfx = GameObject.FindWithTag("SFX").GetComponent<SFXManager>();
         beaconAhoy = GetComponent<AudioSource>();
 		beacon = gameObject;
 		print (beacon);
 		player = GameObject.FindWithTag("Player");
         particles = Instantiate(particlePrefab, transform.position, Quaternion.identity);
-
     }
 	
 	// Update is called once per frame
@@ -30,11 +32,22 @@ public class BeaconCollection : MonoBehaviour {
 		if (beaconDistance < BEACON_COLLECTION_DISTANCE) {
 			collectBeacon();
 		}
-        beaconAhoy.volume = 1f / Mathf.Clamp(beaconDistance, 1, 20);
+        beaconAhoy.volume = .7f / Mathf.Clamp(beaconDistance, .7f, 20f);
+
+        if (beaconDistance < minDistance)
+            minDistance = beaconDistance;
+
+        if(minDistance < 2f)
+        {
+            sfx.setBackGroundVol(.1f);
+        }
+
 
 	}
 
 	void collectBeacon() {
+        minDistance = 20f;
+        sfx.setBackGroundVol(1f);
 		GameManager.incrementCollectedBeacons();
         beaconAhoy.Stop();
         beaconPickUp.Play();
