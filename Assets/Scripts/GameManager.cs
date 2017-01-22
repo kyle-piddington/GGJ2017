@@ -107,7 +107,6 @@ public class GameManager : MonoBehaviour {
 			//beacon.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
 
 			beacons [i] = beacon;
-
 			print (beacon);
 			print (beacon.transform.parent);
 		}
