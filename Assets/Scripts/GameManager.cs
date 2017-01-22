@@ -45,21 +45,21 @@ public class GameManager : MonoBehaviour {
 
         if (playerDead && !audioBegin)
         {
+            sfx.setBackGroundVol(.05f);
             defeatJungle.Play();
             audioBegin = true;
         }
         else if(victoryAchieved && !audioBegin)
         {
+            sfx.setBackGroundVol(.05f);
             victoryJingle.Play();
             audioBegin = true;
         }
 
         if (minBeaconDistance < 3f)
             sfx.setBackGroundVol(.05f);
-        else
-            sfx.setBackGroundVol(1f);
-
-        Debug.Log("Minbeacondistance: " + minBeaconDistance); 	     
+        else if(!victoryAchieved || !playerDead)
+            sfx.setBackGroundVol(1f);	     
 	}
 
 	public Maze mazePrefab;
@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour {
 	public Maze mazeInstance;
 
 	private void BeginGame() {
+        sfx.setBackGroundVol(1f);
 		mazeInstance = Instantiate (mazePrefab) as Maze;
 		//StartCoroutine(mazeInstance.Generate());
 
