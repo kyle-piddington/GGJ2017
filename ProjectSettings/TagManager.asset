@@ -8,6 +8,7 @@ TagManager:
   - Start
   - Quit
   - Enemy
+  - SFX
   layers:
   - Default
   - TransparentFX

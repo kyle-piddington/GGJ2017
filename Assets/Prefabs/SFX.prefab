@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114443617996397844}
   m_Layer: 0
   m_Name: SFX
-  m_TagString: Untagged
+  m_TagString: SFX
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -457,6 +457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPulse: {fileID: 0}
+  drone: {fileID: 82516923140716312}
   chargingAudio: {fileID: 82647901774086108}
   fullyChargedAudio: {fileID: 82963399115370400}
   unchargedPingAudio: {fileID: 82431558774831804}

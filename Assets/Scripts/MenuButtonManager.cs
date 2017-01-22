@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 public class MenuButtonManager : EventTrigger {
     public AudioSource buttonHover;
     public AudioSource buttonClick;
+    public Text buttonText;
     Button mButton;
     //Renderer buttonColor;
 
@@ -35,7 +36,11 @@ public class MenuButtonManager : EventTrigger {
     {
         buttonClick.Play();
         if (gameObject.tag == "Start")
+        {
+            buttonText.text = "Hell";
             SceneManager.LoadScene(1);
+        }
+            
         else if (gameObject.tag == "Quit")
             Application.Quit();
     }

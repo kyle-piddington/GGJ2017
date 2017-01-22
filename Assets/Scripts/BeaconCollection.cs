@@ -11,15 +11,16 @@ public class BeaconCollection : MonoBehaviour {
 	private GameObject player;
     public GameObject particlePrefab;
     private GameObject particles;
+    private bool _collected;
 
 	// Use this for initialization
 	void Start () {
+        _collected = false;
         beaconAhoy = GetComponent<AudioSource>();
 		beacon = gameObject;
 		print (beacon);
 		player = GameObject.FindWithTag("Player");
         particles = Instantiate(particlePrefab, transform.position, Quaternion.identity);
-
     }
 	
 	// Update is called once per frame
@@ -30,19 +31,22 @@ public class BeaconCollection : MonoBehaviour {
 		if (beaconDistance < BEACON_COLLECTION_DISTANCE) {
 			collectBeacon();
 		}
-        beaconAhoy.volume = 1f / Mathf.Clamp(beaconDistance, 1, 20);
+        beaconAhoy.volume = .5f / Mathf.Clamp(beaconDistance, .5f, 20f);
 
+        if (beaconDistance < GameManager.minBeaconDistance && !_collected)
+            GameManager.minBeaconDistance = beaconDistance;
 	}
 
 	void collectBeacon() {
 		GameManager.incrementCollectedBeacons();
         beaconAhoy.Stop();
         beaconPickUp.Play();
-		// Remove the beacon from the scene
-
+        // Remove the beacon from the scene
+        _collected = true;
         gameObject.transform.position = new Vector3(0f, 999f, 0f);
 		Destroy(beacon, beaconPickUp.clip.length);
-		GameObject.Destroy(particles);
+        Destroy(particles);
+        Destroy(gameObject, beaconPickUp.clip.length);
 
 		print ("Beacon collected.");
 
