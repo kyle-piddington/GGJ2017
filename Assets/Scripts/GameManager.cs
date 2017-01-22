@@ -3,9 +3,11 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
+    public SFXManager sfx;
     public GameObject gameOverPanel;
     public AudioSource victoryJingle;
     public AudioSource defeatJungle;
+    public static float minBeaconDistance = 20f;
 	public static int NUM_BEACONS = 4;
 	private static int MIN_BEACON_DISTANCE = 6;
 
@@ -17,8 +19,8 @@ public class GameManager : MonoBehaviour {
 
 	public static void incrementCollectedBeacons() {
 
-		// TODO: trigger sound effects, for example
-
+        // TODO: trigger sound effects, for example
+        minBeaconDistance = 20f;
 		++numCollectedBeacons;
 	}
 
@@ -50,7 +52,14 @@ public class GameManager : MonoBehaviour {
         {
             victoryJingle.Play();
             audioBegin = true;
-        }          	     
+        }
+
+        if (minBeaconDistance < 2f)
+            sfx.setBackGroundVol(.05f);
+        else
+            sfx.setBackGroundVol(1f);
+
+        Debug.Log("Minbeacondistance: " + minBeaconDistance); 	     
 	}
 
 	public Maze mazePrefab;
