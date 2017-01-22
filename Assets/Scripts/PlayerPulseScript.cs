@@ -72,7 +72,6 @@ public class PlayerPulseScript : MonoBehaviour {
     {
 
         StartCoroutine(Camera.main.GetComponent<CameraManager>().Shake((currentCharge / MaxCharge) * camShakeDampFactor));
-        Debug.Log(_sonarCharge);
         float chargeRatio = currentCharge / MaxCharge;
         float _sonarCharge = chargeRatio * maxSonar + minSonar;
 
