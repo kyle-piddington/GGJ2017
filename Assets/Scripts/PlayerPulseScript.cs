@@ -20,7 +20,6 @@ public class PlayerPulseScript : MonoBehaviour {
 	public float minSonar = 2;
     public float maxSonar = 5;
 	public float chargeSpeed;
-	private float _sonarCharge;
     private bool canCharge = true;
     
 	// Use this for initialization
@@ -35,8 +34,6 @@ public class PlayerPulseScript : MonoBehaviour {
         {
             charging = true;
             discharging = false;
-
-            _sonarCharge = Mathf.Clamp((_sonarCharge + chargeRate* Time.deltaTime) + minSonar, minSonar, maxSonar);
             currentCharge = Mathf.Clamp(currentCharge + chargeRate * Time.deltaTime, 0, MaxCharge);
 
             if (currentCharge == MaxCharge)
@@ -73,12 +70,14 @@ public class PlayerPulseScript : MonoBehaviour {
 
     public void releaseCharge()
     {
+        float chargeRatio = currentCharge / MaxCharge;
+        float _sonarCharge = chargeRatio * maxSonar + minSonar;
+
         charging = false;
         discharging = true;
-        StartCoroutine(Camera.main.GetComponent<CameraManager>().Shake((currentCharge / MaxCharge) * camShakeDampFactor));
+        StartCoroutine(Camera.main.GetComponent<CameraManager>().Shake(chargeRatio * camShakeDampFactor));
 
-        Debug.Log(_sonarCharge);
-        Collider[] walls = Physics.OverlapSphere(transform.position, _sonarCharge * rangeRatio);
+        Collider[] walls = Physics.OverlapSphere(transform.position, (_sonarCharge));
         foreach (Collider c in walls)
         {
             WallMaterialScript scr = c.GetComponent<WallMaterialScript>();

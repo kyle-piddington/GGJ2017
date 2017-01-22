@@ -203,7 +203,7 @@ MonoBehaviour:
   camShakeDampFactor: 0.25
   _pulseDist: 0
   MaxCharge: 8
-  rangeRatio: 0.5
+  rangeRatio: 1
   sfx: {fileID: 0}
   fullyCharged: 0
   charging: 0
@@ -211,8 +211,8 @@ MonoBehaviour:
   chargeRate: 4
   currentCharge: 0
   drainRate: 2.1
-  minSonar: 1
-  maxSonar: 18
+  minSonar: 2
+  maxSonar: 10
   chargeSpeed: 2
 --- !u!114 &114614410708197922
 MonoBehaviour:
