@@ -70,9 +70,14 @@ public class PlayerPulseScript : MonoBehaviour {
             { 
                scr.SetSonar(transform.position, _sonarCharge);
             }
+			EnemyAIScript eAI = c.GetComponent<EnemyAIScript> ();
+			if (eAI != null) {
+				eAI.playerPinged (transform.position);
+			}
         }
 
         _sonarCharge = 0;
         discharge = true;
     }
+		
 }
