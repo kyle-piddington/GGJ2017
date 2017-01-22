@@ -5,6 +5,7 @@ using UnityEngine;
 public class SFXManager : MonoBehaviour {
 
     public PlayerPulseScript playerPulse;
+    public AudioSource drone;
     public AudioSource chargingAudio;
     public AudioSource fullyChargedAudio;
     public AudioSource unchargedPingAudio;
@@ -54,5 +55,19 @@ public class SFXManager : MonoBehaviour {
         fullyCharged = false;
         unchargedPing = false;
         chargedPing = false;
+    }
+
+    public void setBackGroundVol(float vol)
+    {
+        if(vol < drone.volume)
+        {
+            while(drone.volume > vol)
+                drone.volume -= 1 * Time.deltaTime;
+        }
+        else
+        {
+            while (drone.volume < vol)
+                drone.volume += 1 * Time.deltaTime;
+        }
     }
 }
