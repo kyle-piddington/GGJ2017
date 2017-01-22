@@ -1,4 +1,17 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: f52ad6188612e41e5885b4df38c40f9b
+timeCreated: 1485024282
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+=======
 guid: 7c6b20098a9464dbeae2f67bfced05ee
 timeCreated: 1485024039
 licenseType: Free
@@ -10,6 +23,7 @@ TextureImporter:
     enableMipMap: 1
     linearTexture: 0
     correctGamma: 0
+>>>>>>> dfc96e72e9ff70b73c857e4564cf2336f8d451f1
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -21,12 +35,19 @@ TextureImporter:
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
+<<<<<<< HEAD
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+=======
   generateCubemap: 0
   cubemapConvolution: 0
   cubemapConvolutionSteps: 7
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
+>>>>>>> dfc96e72e9ff70b73c857e4564cf2336f8d451f1
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
@@ -35,9 +56,13 @@ TextureImporter:
     wrapMode: -1
   nPOTScale: 1
   lightmap: 0
+<<<<<<< HEAD
+  compressionQuality: 50
+=======
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
+>>>>>>> dfc96e72e9ff70b73c857e4564cf2336f8d451f1
   spriteMode: 0
   spriteExtrude: 1
   spriteMeshType: 1
@@ -45,10 +70,30 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+<<<<<<< HEAD
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 0
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+=======
   alphaIsTransparency: 0
   spriteTessellationDetail: -1
   textureType: -1
   buildTargetSettings: []
+>>>>>>> dfc96e72e9ff70b73c857e4564cf2336f8d451f1
   spriteSheet:
     serializedVersion: 2
     sprites: []
