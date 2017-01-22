@@ -36,12 +36,12 @@ public class EnemySFX : MonoBehaviour {
         else
             enemySource.clip = LevelThree;
         enemySource.loop = true;
-        enemySource.maxDistance = 12.0f;
+        enemySource.maxDistance = 10.0f;
         enemySource.volume = globalVolume;
         enemySource.Play();
         
         enemyTransition.loop = false;
-        enemyTransition.maxDistance = 12.0f;
+        enemyTransition.maxDistance = 10.0f;
         enemyTransition.volume = globalVolume;
         inTransition = false;
     }
