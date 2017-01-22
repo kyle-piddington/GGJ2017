@@ -14,6 +14,7 @@ public class PlayerMovementScript : MonoBehaviour {
 
 	private bool playerIsMoving;
 	private bool playerIsTurning;
+
 	// Use this for initialization
 	void Start () {
         playerPulse = GetComponent<PlayerPulseScript>();
@@ -37,6 +38,9 @@ public class PlayerMovementScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+        if (GameManager.playerDead)
+            return;
+
 		if(!playerIsMoving && !playerIsTurning)
 		{
 			if(Input.GetKey(KeyCode.W))

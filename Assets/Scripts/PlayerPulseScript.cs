@@ -29,6 +29,8 @@ public class PlayerPulseScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (GameManager.playerDead)
+            return;
 
         if (Input.GetKey(KeyCode.Space) && canCharge)
         {
@@ -90,6 +92,10 @@ public class PlayerPulseScript : MonoBehaviour {
 			EnemyAIScript eAI = c.GetComponent<EnemyAIScript> ();
 			if (eAI != null) {
 				eAI.playerPinged (transform.position);
+			}
+			BeaconParticleSystem bSys = c.GetComponent<BeaconParticleSystem> ();
+			if (bSys != null) {
+				bSys.burstParticleSystem ();
 			}
         }
 
