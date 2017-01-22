@@ -13,10 +13,13 @@ public class EnemyAIScript : MonoBehaviour {
 	bool chasingPlayer = false;
 	// Use this for initialization
 	void Start () {
+		player = GameObject.FindGameObjectWithTag ("Player");
 		agent = GetComponent<NavMeshAgent> ();
 		target = getRandomPosition ();
 		agent.SetDestination (target);
-		player = GameObject.FindGameObjectWithTag ("Player");
+	if (player == null) {
+			Debug.Log ("Fuck");
+		}
 	}
 	
 	// Update is called once per frame
@@ -57,7 +60,11 @@ public class EnemyAIScript : MonoBehaviour {
 	Vector3 getRandomPosition()
 	{
 		Vector3 randomDirection = Random.insideUnitSphere * walkRadius;
-		randomDirection += transform.position;
+		if (Random.Range (0, 10) < 3) {
+			randomDirection += player.transform.position;
+		} else {
+			randomDirection += transform.position;
+		}
 		NavMeshHit hit;
 		NavMesh.SamplePosition(randomDirection, out hit, walkRadius, 1);
 		Vector3 finalPosition = hit.position;
