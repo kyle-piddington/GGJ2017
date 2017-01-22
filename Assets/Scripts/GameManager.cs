@@ -3,10 +3,10 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-	private static int NUM_BEACONS = 4;
+	public static int NUM_BEACONS = 4;
 	private static int MIN_BEACON_DISTANCE = 6;
 
-	private static int numCollectedBeacons = 0;
+	public static int numCollectedBeacons = 0;
 
 	public static void incrementCollectedBeacons() {
 

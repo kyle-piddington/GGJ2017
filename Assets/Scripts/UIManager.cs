@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour {
     public PlayerPulseScript pulseCharge;
     Text fragCount;
     Slider chargeBar;
+
 	// Use this for initialization
 	void Start () {
         fragCount = GetComponentInChildren<Text>();
@@ -17,6 +18,6 @@ public class UIManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         chargeBar.value = pulseCharge.currentCharge;
-        fragCount.text = "0/4";
+        fragCount.text = GameManager.numCollectedBeacons + "/" + GameManager.NUM_BEACONS;
 	}
 }

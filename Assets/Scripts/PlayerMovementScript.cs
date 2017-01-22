@@ -44,7 +44,6 @@ public class PlayerMovementScript : MonoBehaviour {
 		{
 			if(Input.GetKey(KeyCode.W))
 			{
-                currentDirection = 'W';
 				if (!willCollideWithWall (transform.forward * 0.75f)) {
 					
 					_playerTargetPosition = transform.position + transform.forward.normalized; 
@@ -55,7 +54,6 @@ public class PlayerMovementScript : MonoBehaviour {
 			}
 			else if(Input.GetKey(KeyCode.S))
 			{
-                currentDirection = 'S';
 				if(!willCollideWithWall(-transform.forward * 0.75f)){
 					_playerTargetPosition = transform.position - transform.forward; 
 					playerIsMoving = true;
@@ -65,13 +63,11 @@ public class PlayerMovementScript : MonoBehaviour {
 			}
 			else if(Input.GetKey(KeyCode.A))
 			{
-                currentDirection = 'A';
 				_playerTargetRotation -= 90;
 				playerIsTurning = true;
 			}
 			else if(Input.GetKey(KeyCode.D))
 			{
-                currentDirection = 'D';
 				_playerTargetRotation += 90;
 				playerIsTurning = true;
 			}
@@ -101,17 +97,5 @@ public class PlayerMovementScript : MonoBehaviour {
 				}
 			}
 		}
-
-        if (_playerIsColliding && !playerBump)
-        {
-            playerPulse.bumpPulse();
-            _playerIsColliding = false;
-            playerBump = true;
-        }
-
-        if (prevDirection != currentDirection)
-            playerBump = false;
-
-        prevDirection = currentDirection;
 	}
 }
