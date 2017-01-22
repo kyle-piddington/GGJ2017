@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BeaconCollection : MonoBehaviour {
-    SFXManager sfx;
     public AudioSource beaconAhoy;
     public AudioSource beaconPickUp;
 	private const float BEACON_COLLECTION_DISTANCE = 0.5f;
-    private static float minDistance = 20f;
 
 	private GameObject beacon;
 	private GameObject player;
     public GameObject particlePrefab;
     private GameObject particles;
+    private bool _collected;
 
 	// Use this for initialization
 	void Start () {
-        sfx = GameObject.FindWithTag("SFX").GetComponent<SFXManager>();
+        _collected = false;
         beaconAhoy = GetComponent<AudioSource>();
 		beacon = gameObject;
 		print (beacon);
@@ -32,30 +31,22 @@ public class BeaconCollection : MonoBehaviour {
 		if (beaconDistance < BEACON_COLLECTION_DISTANCE) {
 			collectBeacon();
 		}
-        beaconAhoy.volume = .7f / Mathf.Clamp(beaconDistance, .7f, 20f);
+        beaconAhoy.volume = .5f / Mathf.Clamp(beaconDistance, .5f, 20f);
 
-        if (beaconDistance < minDistance)
-            minDistance = beaconDistance;
-
-        if(minDistance < 2f)
-        {
-            sfx.setBackGroundVol(.1f);
-        }
-
-
+        if (beaconDistance < GameManager.minBeaconDistance && !_collected)
+            GameManager.minBeaconDistance = beaconDistance;
 	}
 
 	void collectBeacon() {
-        minDistance = 20f;
-        sfx.setBackGroundVol(1f);
 		GameManager.incrementCollectedBeacons();
         beaconAhoy.Stop();
         beaconPickUp.Play();
-		// Remove the beacon from the scene
-
+        // Remove the beacon from the scene
+        _collected = true;
         gameObject.transform.position = new Vector3(0f, 999f, 0f);
 		Destroy(beacon, beaconPickUp.clip.length);
-		GameObject.Destroy(particles);
+        Destroy(particles);
+        Destroy(gameObject, beaconPickUp.clip.length);
 
 		print ("Beacon collected.");
 

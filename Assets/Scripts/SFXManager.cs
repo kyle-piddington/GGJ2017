@@ -64,7 +64,7 @@ public class SFXManager : MonoBehaviour {
             while(drone.volume > vol)
                 drone.volume -= 1 * Time.deltaTime;
         }
-        else
+        else if(vol > drone.volume)
         {
             while (drone.volume < vol)
                 drone.volume += 1 * Time.deltaTime;
