@@ -43,7 +43,7 @@ public class PlayerMovementScript : MonoBehaviour {
 
 		if(!playerIsMoving && !playerIsTurning)
 		{
-			if(Input.GetKey(KeyCode.W))
+			if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
 			{
 				if (!willCollideWithWall (transform.forward * 0.75f)) {
 					
@@ -53,7 +53,7 @@ public class PlayerMovementScript : MonoBehaviour {
 					_playerIsColliding = true;
 				}
 			}
-			else if(Input.GetKey(KeyCode.S))
+			else if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
 			{
 				if(!willCollideWithWall(-transform.forward * 0.75f)){
 					_playerTargetPosition = transform.position - transform.forward; 
@@ -62,12 +62,12 @@ public class PlayerMovementScript : MonoBehaviour {
 					_playerIsColliding = true;
 				}
 			}
-			else if(Input.GetKey(KeyCode.A))
+			else if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
 			{
 				_playerTargetRotation -= 90;
 				playerIsTurning = true;
 			}
-			else if(Input.GetKey(KeyCode.D))
+			else if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
 			{
 				_playerTargetRotation += 90;
 				playerIsTurning = true;
