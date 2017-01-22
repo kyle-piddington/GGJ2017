@@ -29,6 +29,8 @@ public class PlayerPulseScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (GameManager.playerDead)
+            return;
 
         if (Input.GetKey(KeyCode.Space) && canCharge)
         {
