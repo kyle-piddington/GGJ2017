@@ -4,7 +4,6 @@ using System.Collections;
 public class PlayerPulseScript : MonoBehaviour {
 
     public float camShakeDampFactor = .25f;
-    public float coolDownTime;
 	public float _pulseDist;
 	public float MaxCharge;
 
@@ -46,7 +45,7 @@ public class PlayerPulseScript : MonoBehaviour {
                 canCharge = false;
             }
         }
-        else if (Input.GetKeyUp(KeyCode.Space))
+        else if (Input.GetKeyUp(KeyCode.Space) && !discharging)
         {
             releaseCharge();
             canCharge = false;
@@ -74,11 +73,10 @@ public class PlayerPulseScript : MonoBehaviour {
     {
         charging = false;
         discharging = true;
-
         StartCoroutine(Camera.main.GetComponent<CameraManager>().Shake((currentCharge / MaxCharge) * camShakeDampFactor));
 
         Debug.Log(_sonarCharge);
-        Collider[] walls = Physics.OverlapSphere(transform.position, _sonarCharge + 5.0f);
+        Collider[] walls = Physics.OverlapSphere(transform.position, _sonarCharge);
         foreach (Collider c in walls)
         {
             WallMaterialScript scr = c.GetComponent<WallMaterialScript>();

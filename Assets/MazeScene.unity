@@ -452,10 +452,7 @@ Prefab:
       propertyPath: sfx
       value: 
       objectReference: {fileID: 1620248360}
-    m_RemovedComponents:
-    - {fileID: 82139614124467534, guid: 65bc467e6d5af4158b1dee01f4dfc1aa, type: 2}
-    - {fileID: 82694901712049734, guid: 65bc467e6d5af4158b1dee01f4dfc1aa, type: 2}
-    - {fileID: 82899345015641158, guid: 65bc467e6d5af4158b1dee01f4dfc1aa, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 65bc467e6d5af4158b1dee01f4dfc1aa, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &1310002080 stripped
