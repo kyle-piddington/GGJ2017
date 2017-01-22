@@ -9,6 +9,8 @@ Shader "Custom/Proximity" {
         _OutlineColour ("Outline Colour", color) = (1.0,1.0,1.0,1.0) // Colour of the outline
         _EdgeBorder ("Edge Border", float) = 0.005
         _MaxDistance ("Max Distance", float) = 10.0
+        _EnemyVisibleDistance ("Enemy Distance", float) = 0.0 //Distance to the enemy
+        _EnemyPosition ("Enemy Position", vector) = (2,0,0,0)
        
     }
     SubShader {
@@ -23,6 +25,9 @@ Shader "Custom/Proximity" {
         // Access the shaderlab properties
         uniform sampler2D _MainTex;
         uniform float4 _PlayerPosition;
+        uniform float4 _EnemyPosition;
+        uniform float _EnemyVisibleDistance;
+
         uniform float _VisibleDistance;
         uniform float _OutlineWidth;
         uniform fixed4 _OutlineColour;
@@ -52,36 +57,70 @@ Shader "Custom/Proximity" {
             return output;
         }
   
-        // FRAGMENT SHADER
+      
+        float4 calculatePlayerRing(vertexOutput input)
+        {
+	         float dist = distance(input.position_in_world_space, _PlayerPosition);
+	  			
+	  		
+	  		
+	            // Return appropriate colour
+	            if (dist < _VisibleDistance && dist < _MaxDistance) {
+	            	//Edge shading only
+	            	half inEdge = 0;
+	            	half speedScale = 0.5;
+	            	if(min(input.tex.x, input.tex.y) < _EdgeBorder || max(input.tex.x, input.tex.y) > (1 - _EdgeBorder))
+	            	{
+	            		inEdge = 0.8;
+	            	}
+	            	inEdge = (inEdge)/((_VisibleDistance - dist)*speedScale) - 0.1;
+
+	                return float4(inEdge,inEdge,inEdge,1); // Visible
+	            }
+	            else if (dist < _VisibleDistance + _OutlineWidth && dist < _MaxDistance) {
+	                return _OutlineColour; // Edge of visible range
+	            }
+	            else {
+	                float4 tex = float4(0,0,0,1);//tex2D(_MainTex, float2(input.tex)); // Outside visible range
+	                //tex.a = 0;
+	                return tex;
+	            }
+        }
+
+        float4 calculateEnemyRing(vertexOutput input)
+        {
+        	 // Return appropriate colour
+        	  float dist = distance(input.position_in_world_space, _EnemyPosition);
+	  		
+	            if (dist < _EnemyVisibleDistance) {
+	            	//Edge shading only
+	            	half inEdge = 0;
+	            	half speedScale = 0.5;
+	            	if(min(input.tex.x, input.tex.y) < _EdgeBorder*3 || max(input.tex.x, input.tex.y) > (1 - _EdgeBorder) * 3)
+	            	{
+	            		inEdge = 0.8;
+	            	}
+	            	inEdge = (inEdge)/((_EnemyVisibleDistance - dist)*speedScale) - 0.1;
+	            	inEdge *= tex2D(_MainTex,input.tex + float2(_EnemyVisibleDistance + dist,-_EnemyVisibleDistance + dist));
+	                return float4(inEdge,inEdge*0.2,inEdge*0.2,1); // Visible
+	            }
+	            else if (dist < _EnemyVisibleDistance + _OutlineWidth/2) {
+	                return float4(0.8,0.2,0.2,1); // Edge of visible range
+	            }
+	            else {
+	                float4 tex = float4(0,0,0,1);//tex2D(_MainTex, float2(input.tex)); // Outside visible range
+	                //tex.a = 0;
+	                return tex;
+	            }
+        }
+          // FRAGMENT SHADER
         float4 frag(vertexOutput input) : COLOR 
         {
-            // Calculate distance to player position
-            float dist = distance(input.position_in_world_space, _PlayerPosition);
-  			
-  		
-  		
-            // Return appropriate colour
-            if (dist < _VisibleDistance && dist < _MaxDistance) {
-            	//Edge shading only
-            	half inEdge = 0;
-            	half speedScale = 0.25;
-            	if(min(input.tex.x, input.tex.y) < _EdgeBorder || max(input.tex.x, input.tex.y) > (1 - _EdgeBorder))
-            	{
-            		inEdge = 0.8;
-            	}
-            	inEdge = (inEdge)/((_VisibleDistance - dist)*speedScale) - 0.1;
-            	inEdge *= tex2D(_MainTex,input.tex + float2(_VisibleDistance + dist,-_VisibleDistance + dist));
-                return float4(inEdge,inEdge,inEdge,1); // Visible
-            }
-            else if (dist < _VisibleDistance + _OutlineWidth && dist < _MaxDistance) {
-                return _OutlineColour; // Edge of visible range
-            }
-            else {
-                float4 tex = float4(0,0,0,1);//tex2D(_MainTex, float2(input.tex)); // Outside visible range
-                //tex.a = 0;
-                return tex;
-            }
+            float4 playerRing = calculatePlayerRing(input);
+            float4 enemyRing = calculateEnemyRing(input);
+            return playerRing + enemyRing;
         }
+
  
         ENDCG
         } // End Pass

@@ -13,13 +13,16 @@ public class BeaconCollection : MonoBehaviour {
 	void Start () {
 
 		beacon = gameObject;
+		print (beacon);
 		player = GameObject.FindWithTag("Player");
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		double beaconDistance = Vector3.Distance (player.transform.position, gameObject.transform.position);
+		Vector2 playerFlatVector = new Vector2 (player.transform.position.x, player.transform.position.z);
+		Vector2 beaconFlatVector = new Vector2 (beacon.transform.position.x, beacon.transform.position.z);
+		double beaconDistance = Vector2.Distance (playerFlatVector, beaconFlatVector);
 		if (beaconDistance < BEACON_COLLECTION_DISTANCE) {
 			collectBeacon();
 		}
@@ -30,6 +33,8 @@ public class BeaconCollection : MonoBehaviour {
 
 		// Remove the beacon from the scene
 		GameObject.Destroy(beacon);
+
+		print ("Beacon collected.");
 
 		// TODO: visual effects?
 
