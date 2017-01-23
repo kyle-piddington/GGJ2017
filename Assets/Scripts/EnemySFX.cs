@@ -18,6 +18,9 @@ public class EnemySFX : MonoBehaviour {
     private GameObject enemy;
 
     public float globalVolume;
+    public float maxSoundDist;
+    public float midSoundDist;
+    public float minSoundDist;
     private bool inTransition;
 
 	// Use this for initialization
@@ -29,19 +32,19 @@ public class EnemySFX : MonoBehaviour {
         enemy = GameObject.FindGameObjectWithTag("Enemy");
         // Not currently switching between tracks
 
-        if (getPlayerDist() > 10)
+        if (getPlayerDist() > midSoundDist)
             enemySource.clip = Intro;
-        else if (getPlayerDist() > 5)
+        else if (getPlayerDist() > minSoundDist)
             enemySource.clip = LevelTwo;
         else
             enemySource.clip = LevelThree;
         enemySource.loop = true;
-        enemySource.maxDistance = 10.0f;
+        enemySource.maxDistance = maxSoundDist;
         enemySource.volume = globalVolume;
         enemySource.Play();
         
         enemyTransition.loop = false;
-        enemyTransition.maxDistance = 10.0f;
+        enemyTransition.maxDistance = maxSoundDist;
         enemyTransition.volume = globalVolume;
         inTransition = false;
     }
@@ -52,14 +55,14 @@ public class EnemySFX : MonoBehaviour {
 
         playerDist = getPlayerDist();
         
-        if (playerDist > 10.0f) {
+        if (playerDist > midSoundDist) {
                 
             if (enemySource.clip == LevelTwo && !enemyTransition.isPlaying)
                 swapSounds(Intro, LevelTwoDecrease);
         }
         else {
 
-            if (playerDist > 5.0f) {
+            if (playerDist > minSoundDist) {
 
                 if (enemySource.clip == Intro && !enemyTransition.isPlaying)
                     swapSounds(LevelTwo, IntroEscalate);
