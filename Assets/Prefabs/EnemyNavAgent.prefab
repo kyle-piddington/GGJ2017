@@ -1373,7 +1373,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1397,7 +1397,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!95 &95987135394991634
 Animator:
   serializedVersion: 3
@@ -1482,6 +1482,9 @@ MonoBehaviour:
   LevelThreeDecrease: {fileID: 8300000, guid: a2f2d49a6b1c6c74088655be718c1f0b, type: 3}
   LevelThree: {fileID: 8300000, guid: 3ccf6f8628f1f0445a9ac117fbd452d7, type: 3}
   globalVolume: 0.15
+  maxSoundDist: 7
+  midSoundDist: 5
+  minSoundDist: 3
 --- !u!137 &137258458552657588
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
