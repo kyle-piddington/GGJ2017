@@ -20,7 +20,17 @@ public class FadeScript : MonoBehaviour
             flicker = !flicker;
             yield return new WaitForSeconds(1 / Mathf.Pow(2*(i + 1), 2));
         }
-        
+        instructions.enabled = true;
+        instructions.text = "You will burn here like the rest of us.";
+        flicker = false;
+        yield return new WaitForSeconds(fadeTime / 3f);
+        for (int i = 0; i < 19; i++)
+        {
+            instructions.enabled = flicker;
+            flicker = !flicker;
+            yield return new WaitForSeconds(1 / Mathf.Pow(2 * (i + 1), 2));
+        }
+
         yield return null;
     }
     // Use this for initialization
