@@ -38,7 +38,7 @@ public class MenuButtonManager : EventTrigger {
         if (gameObject.tag == "Start")
         {
             buttonText.text = "Hell";
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene("MazeScene2");
         }
             
         else if (gameObject.tag == "Quit")
